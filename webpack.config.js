@@ -1,13 +1,13 @@
-const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const config = {
-  entry: './src/quill-emoji.js',
+  entry: "./src/quill-emoji.js",
   output: {
-    filename: 'quill-emoji.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "quill-emoji.js",
+    path: path.resolve(__dirname, "dist"),
     library: "QuillEmoji",
     libraryTarget: "umd"
   },
@@ -15,10 +15,10 @@ const config = {
   mode: "production",
   externals: {
     quill: {
-      commonjs: 'quill',
-      commonjs2: 'quill',
-      amd: 'quill',
-      root: 'Quill'
+      commonjs: "quill",
+      commonjs2: "quill",
+      amd: "quill",
+      root: "Quill"
     }
   },
   module: {
@@ -27,39 +27,37 @@ const config = {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'resolve-url-loader',
-          { 
-            loader: 'sass-loader',
+          "css-loader",
+          "resolve-url-loader",
+          {
+            loader: "sass-loader",
             options: {
               sourceMap: true,
               sourceMapContents: false
             }
-          },
-        ],
+          }
+        ]
       },
       {
         test: /\.(jpg|png|gif)$/i,
         include: /src/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
               limit: 8192
             }
           }
-        ],
+        ]
       },
       {
         test: /\.js$/,
-        include: [
-          path.resolve(__dirname, "src/")
-        ],
+        include: [path.resolve(__dirname, "src/")],
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [['@babel/preset-env', { modules: false }]]
+            presets: [["@babel/preset-env", { modules: false }]]
           }
         }
       }
@@ -70,7 +68,7 @@ const config = {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {
-            warnings: false,
+            // warnings: false,
             conditionals: true,
             unused: true,
             comparisons: true,
@@ -90,10 +88,10 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'quill-emoji.css',
-      chunkFilename: '[id].css',
+      filename: "quill-emoji.css",
+      chunkFilename: "[id].css"
     })
-  ],
+  ]
 };
 
 module.exports = config;
