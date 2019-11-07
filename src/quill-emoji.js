@@ -6,6 +6,8 @@ import ToolbarEmoji from "./module-toolbar-emoji";
 import TextAreaEmoji from "./module-textarea-emoji";
 import "./scss/quill-emoji.scss";
 
+export { EmojiMap };
+
 Quill.register(
   {
     "formats/emoji": EmojiBlot,
@@ -16,4 +18,4 @@ Quill.register(
   true
 );
 
-export default { EmojiBlot, EmojiMap, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji };
+export default { EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji };
